@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Works | Web Designer & Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 24px;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        /* Grid Layout (Same as index but repeatable) */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .work-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .work-card.hidden {
+            display: none;
+        }
+
+        .work-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .work-card:hover .work-img {
+            transform: scale(1.05);
+        }
+
+        .work-info {
+            padding: 20px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 900px;
+            border-radius: 12px;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-details {
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header" id="header" style="background-color: #333;">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">PORTFOLIO</a>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <nav class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">トップ</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">自己紹介</a></li>
+                <li class="nav-item"><a href="works.html" class="nav-link">実績</a></li>
+                <li class="nav-item"><a href="service.html" class="nav-link">サービス</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">お問い合わせ</a></li>
+            </nav>
+        </div>
+    </header>
+
+    <div class="section container" style="margin-top: 60px;">
+        <h2 class="section-title" data-aos="fade-up">WORKS</h2>
+
+        <div class="filter-buttons" data-aos="fade-up">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web Design</button>
+            <button class="filter-btn" data-filter="lp">LP</button>
+            <button class="filter-btn" data-filter="app">UI/UX</button>
+        </div>
+
+        <div class="works-grid" data-aos="fade-up">
+            <!-- Item 1 (Repeating for effect) -->
+            <div class="work-card" data-category="web" onclick="openModal('agency')">
+                <img src="images/work_agency.png" alt="Work" class="work-img">
+                <div class="work-info">
+                    <div class="work-cat">Web Design</div>
+                    <h3 class="work-title">デジタルエージェンシー</h3>
+                </div>
+            </div>
+            <div class="work-card" data-category="lp" onclick="openModal('cafe')">
+                <img src="images/work_cafe.png" alt="Work" class="work-img">
+                <div class="work-info">
+                    <div class="work-cat">LP</div>
+                    <h3 class="work-title">カフェ「Hearth & Bean」</h3>
+                </div>
+            </div>
+            <div class="work-card" data-category="app" onclick="openModal('app')">
+                <img src="images/work_app.png" alt="Work" class="work-img">
+                <div class="work-info">
+                    <div class="work-cat">UI/UX</div>
+                    <h3 class="work-title">分析ダッシュボード</h3>
+                </div>
+            </div>
+            <!-- Dummy Items -->
+            <div class="work-card" data-category="web" onclick="openModal('dummy')">
+                <img src="images/work_agency.png" alt="Work" class="work-img" style="filter: hue-rotate(90deg);">
+                <div class="work-info">
+                    <div class="work-cat">Web Design</div>
+                    <h3 class="work-title">企業コーポレートサイト</h3>
+                </div>
+            </div>
+            <div class="work-card" data-category="lp" onclick="openModal('dummy')">
+                <img src="images/work_cafe.png" alt="Work" class="work-img" style="filter: hue-rotate(45deg);">
+                <div class="work-info">
+                    <div class="work-cat">LP</div>
+                    <h3 class="work-title">美容コスメキャンペーン</h3>
+                </div>
+            </div>
+            <div class="work-card" data-category="app" onclick="openModal('dummy')">
+                <img src="images/work_app.png" alt="Work" class="work-img" style="filter: hue-rotate(180deg);">
+                <div class="work-info">
+                    <div class="work-cat">UI/UX</div>
+                    <h3 class="work-title">タスク管理アプリ</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="workModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <img id="modalImg" src="" class="modal-img">
+                <div class="modal-details">
+                    <h2 id="modalTitle">Project Title</h2>
+                    <p id="modalDesc">Project description goes here...</p>
+                    <p style="margin-top: 20px;"><strong>担当範囲:</strong> デザイン / コーディング</p>
+                    <p><strong>制作期間:</strong> 1ヶ月</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="copyright">&copy; 2026 Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const workCards = document.querySelectorAll('.work-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                workCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.classList.remove('hidden');
+                        card.style.display = 'block'; // Ensure visibility
+                        // Trigger AOS refresh might be needed or simple CSS fade
+                    } else {
+                        card.classList.add('hidden');
+                        card.style.display = 'none'; // Hide
+                    }
+                });
+
+                // Re-trigger AOS layouts if necessary, but display none handles it roughly.
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById("workModal");
+        const modalImg = document.getElementById("modalImg");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDesc = document.getElementById("modalDesc");
+
+        // Data for modal (Simulation)
+        const worksData = {
+            'agency': {
+                img: 'images/work_agency.png',
+                title: 'デジタルエージェンシー公式サイト',
+                desc: '信頼感と先進性を表現したBtoB向けコーポレートサイトです。青を基調に、余白を活かしたデザインに仕上げました。'
+            },
+            'cafe': {
+                img: 'images/work_cafe.png',
+                title: 'カフェ「Hearth & Bean」LP',
+                desc: '温かみのある配色と写真を中心に、来店意欲をそそるランディングページを作成しました。'
+            },
+            'app': {
+                img: 'images/work_app.png',
+                title: '分析ダッシュボードUI',
+                desc: '複雑なデータを直感的に理解できるUIデザイン。ダークモードを採用し、長時間の作業でも目が疲れないよう配慮しています。'
+            },
+            'dummy': {
+                img: 'images/work_agency.png',
+                title: 'Sample Project',
+                desc: 'これはサンプルの実績詳細です。実際には各プロジェクトの詳細が入ります。'
+            }
+        };
+
+        function openModal(id) {
+            const data = worksData[id] || worksData['dummy'];
+            modal.style.display = "block";
+            modalImg.src = data.img;
+            modalTitle.innerText = data.title;
+            modalDesc.innerText = data.desc;
+            document.body.style.overflow = "hidden"; // Prevent background scroll
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>

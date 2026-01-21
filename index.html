@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Web Designer & Creator</title>
+    <meta name="description" content="Webデザイナーのポートフォリオサイト。デザインでビジネスを加速させます。">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Additional Styles for Index -->
+    <style>
+        /* Works Section override */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .work-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            background: var(--white);
+            position: relative;
+        }
+        
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .work-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .work-info {
+            padding: 20px;
+        }
+        
+        .work-cat {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .work-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .skill-item {
+            margin-bottom: 25px;
+        }
+        
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .progress-bar-bg {
+            width: 100%;
+            height: 10px;
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            width: 0; /* Animate to width */
+            transition: width 1.5s ease-in-out;
+        }
+        
+        /* Testimonials */
+        .swiper {
+            width: 100%;
+            padding-bottom: 50px;
+        }
+        
+        .swiper-slide {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            height: auto;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .client-text {
+            font-style: italic;
+            color: #4b5563;
+        }
+        
+        .section-bg {
+            background-color: var(--bg-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">PORTFOLIO</a>
+            
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">トップ</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">自己紹介</a></li>
+                <li class="nav-item"><a href="works.html" class="nav-link">実績</a></li>
+                <li class="nav-item"><a href="service.html" class="nav-link">サービス</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">お問い合わせ</a></li>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="container hero-content" data-aos="fade-up">
+            <h1>デザインで、<br>ビジネスを加速させる</h1>
+            <p>ミニマルで洗練されたWeb体験を提供します。</p>
+            <div class="hero-buttons">
+                <a href="works.html" class="btn btn-outline">実績を見る</a>
+                <a href="contact.html" class="btn btn-primary">お問い合わせ</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Works Highlight -->
+    <section class="section container">
+        <h2 class="section-title" data-aos="fade-up">SELECTED WORKS</h2>
+        <div class="works-grid">
+            <div class="work-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="images/work_agency.png" alt="Agency Website" class="work-img">
+                <div class="work-info">
+                    <div class="work-cat">Web Design</div>
+                    <h3 class="work-title">デジタルエージェンシー公式サイト</h3>
+                </div>
+            </div>
+            <div class="work-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="images/work_cafe.png" alt="Cafe Website" class="work-img">
+                <div class="work-info">
+                    <div class="work-cat">LP Design</div>
+                    <h3 class="work-title">カフェ「Hearth & Bean」LP</h3>
+                </div>
+            </div>
+            <div class="work-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="images/work_app.png" alt="Dashboard App" class="work-img">
+                <div class="work-info">
+                    <div class="work-cat">UI/UX Design</div>
+                    <h3 class="work-title">分析ダッシュボードUI</h3>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" style="margin-top: 40px;" data-aos="fade-up">
+            <a href="works.html" class="btn btn-primary">すべての実績を見る</a>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section section-bg">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">SKILLS</h2>
+            <div class="skills-container">
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-info">
+                        <span>Web Design</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-info">
+                        <span>Coding (HTML/CSS/JS)</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-info">
+                        <span>UI/UX Design</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section container">
+        <h2 class="section-title" data-aos="fade-up">VOICE</h2>
+        <div class="swiper mySwiper" data-aos="fade-up">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="client-info">
+                        <div class="client-avatar" style="background: #FFD700;"></div> <!-- Placeholder -->
+                        <div>
+                            <h4>株式会社〇〇 代表</h4>
+                            <small>Webリニューアル</small>
+                        </div>
+                    </div>
+                    <p class="client-text">「素晴らしいデザインです。売上が20%アップしました！コミュニケーションもスムーズで助かりました。」</p>
+                </div>
+                <div class="swiper-slide">
+                    <div class="client-info">
+                        <div class="client-avatar" style="background: #C0C0C0;"></div>
+                        <div>
+                            <h4>カフェオーナー 様</h4>
+                            <small>LP制作</small>
+                        </div>
+                    </div>
+                    <p class="client-text">「お店の雰囲気がそのまま伝わる素敵なページができました。お客様からも好評です。」</p>
+                </div>
+                 <div class="swiper-slide">
+                    <div class="client-info">
+                        <div class="client-avatar" style="background: #CD7F32;"></div>
+                        <div>
+                            <h4>テックスタートアップ 様</h4>
+                            <small>UIデザイン</small>
+                        </div>
+                    </div>
+                    <p class="client-text">「複雑なデータを分かりやすく可視化していただき、開発チームも喜んでいます。」</p>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">PORTFOLIO</div>
+                <div class="social-links">
+                    <a href="#" class="social-icon">Tw</a>
+                    <a href="#" class="social-icon">In</a>
+                    <a href="#" class="social-icon">No</a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
