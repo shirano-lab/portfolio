@@ -327,47 +327,293 @@ img {
         background-color: var(--text-color);
     }
 
+    /* Mobile Navigation Enhanced */
     .nav-menu {
         position: fixed;
-        left: -100%;
+        left: 0;
         top: 0;
         gap: 0;
         flex-direction: column;
-        background-color: var(--white);
+        background-color: rgba(255, 255, 255, 0.85);
+        /* More transparent for glass effect */
+        backdrop-filter: blur(12px);
+        /* Glass effect */
+        -webkit-backdrop-filter: blur(12px);
+        /* Safari support */
         width: 100%;
         height: 100vh;
-        text-align: center;
-        transition: 0.3s;
-        padding-top: 80px;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding-top: 0;
+        opacity: 0;
+        pointer-events: none;
     }
 
     .nav-menu.active {
-        left: 0;
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     }
 
     .nav-item {
-        margin: 16px 0;
+        margin: 20px 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: 0.3s;
+    }
+
+    .nav-menu.active .nav-item {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Stagger animation for menu items */
+    .nav-menu.active .nav-item:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .nav-menu.active .nav-item:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+
+    .nav-menu.active .nav-item:nth-child(3) {
+        transition-delay: 0.3s;
+    }
+
+    .nav-menu.active .nav-item:nth-child(4) {
+        transition-delay: 0.4s;
+    }
+
+    .nav-menu.active .nav-item:nth-child(5) {
+        transition-delay: 0.5s;
     }
 
     .nav-link {
         color: var(--text-color);
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        font-weight: 700;
     }
 
+    /* Hero Mobile Optimization */
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+        /* Clamp for smoother scaling */
+        margin-bottom: 24px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .hero-content p {
         font-size: 1.1rem;
+        line-height: 1.8;
+        padding: 0 20px;
     }
 
     .hero-buttons {
         flex-direction: column;
         padding: 0 40px;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 16px 32px;
+        /* Optimize tap target */
+    }
+
+    .section {
+        padding: 60px 0;
+        /* More breathable on mobile but not too huge */
     }
 
     .section-title {
         font-size: 2rem;
+        margin-bottom: 40px;
+    }
+}
+
+/* =========================================
+   Migrated & Enhanced Component Styles
+   ========================================= */
+
+/* Works Section */
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    /* Larger gap */
+}
+
+/* Mobile specific for works grid */
+@media screen and (max-width: 640px) {
+    .works-grid {
+        grid-template-columns: 1fr;
+        /* Force 1 column on small mobile */
+        gap: 30px;
+    }
+}
+
+.work-card {
+    border-radius: 16px;
+    /* softer formatting */
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    /* Softer shadow */
+    transition: var(--transition);
+    background: var(--white);
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+@media (hover: hover) {
+    .work-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.work-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.work-card:hover .work-img {
+    transform: scale(1.05);
+    /* Subtle zoom */
+}
+
+.work-info {
+    padding: 24px 28px;
+}
+
+.work-cat {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+}
+
+.work-title {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* Skills Section */
+.skills-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.skill-item {
+    margin-bottom: 30px;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background-color: #f3f4f6;
+    border-radius: 100px;
+    /* Pill shape */
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #60a5fa);
+    /* Gradient bar */
+    border-radius: 100px;
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
+}
+
+/* Testimonials */
+.swiper {
+    width: 100%;
+    padding-bottom: 60px;
+}
+
+.swiper-slide {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+    height: auto;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s;
+}
+
+.swiper-slide:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    /* Lift effect */
+}
+
+.client-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.client-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #f3f4f6;
+    margin-right: 16px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.client-avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.client-text {
+    font-style: normal;
+    color: #4b5563;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.section-bg {
+    background-color: #f9fafb;
+}
+
+/* Additional utility - clamp implementation for fluid typography base */
+html {
+    font-size: 16px;
+}
+
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 15px;
+        /* Slightly smaller base on very small screens, but components handle local sizing */
     }
 }
